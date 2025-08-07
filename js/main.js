@@ -34,6 +34,31 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!video.matches(":hover")) video.controls = false;
     });
   });
+
+  // -------- Dropdown menu logic (header right) --------
+  const dropdownBtn = document.getElementById("dropdownMenuBtn");
+  const dropdownMenu = document.getElementById("dropdownMenu");
+  if (dropdownBtn && dropdownMenu) {
+    dropdownBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      dropdownMenu.classList.toggle("show");
+    });
+    // 点击外部关闭
+    document.addEventListener("click", function (e) {
+      if (dropdownMenu.classList.contains("show")) {
+        // 如果点击的不是按钮或菜单本身
+        if (!dropdownMenu.contains(e.target) && e.target !== dropdownBtn) {
+          dropdownMenu.classList.remove("show");
+        }
+      }
+    });
+    // ESC键关闭
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        dropdownMenu.classList.remove("show");
+      }
+    });
+  }
 });
 
 /* ------------------------------------------------------------
